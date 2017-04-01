@@ -31,7 +31,7 @@ void Print(Complex* array, int count)
 
 int main()
 {
-    int count;
+    unsigned int count;
     Complex* array, *after;
 
     count = 8;

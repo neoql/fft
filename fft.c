@@ -25,30 +25,28 @@ static Complex* GetW(int count)
 }
 
 
-static void Rader(Complex *src, Complex *dest, int count)
+static void Rader(Complex *src, Complex *dest, unsigned int count)
 {
-    unsigned short i, j, k;
-    int t;
+    unsigned int i, j, k, lv;
 
-    for (i = 0; i < count; i++) {
-        k = i; j = 0;
-        t = (int) (log(count) / log(2));
-
-        while (t--) {
-            j = j << 1;
-            j |= (k & 1);
-            k = k >> 1;
+    j = 0;
+    for (i = 1; i < count; i++) {
+        lv = 0;
+        while (1) {
+            k = count >> ++lv;
+            if (k > j) {
+                j |= k;
+                break;
+            }
+            j -= k;
         }
-
-        if (j > 1) {
-            dest[i] = src[j];
-            dest[j] = src[i];
-        }
+        dest[i] = src[j];
     }
+    return;
 }
 
 
-void fft(Complex *src, Complex *dest, int count)
+void fft(Complex *src, Complex *dest, unsigned int count)
 {
     int i, j, k, l;
     Complex up, down, temp;
