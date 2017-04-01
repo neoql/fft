@@ -2,3 +2,4 @@
 build/*
 Win32/*
 .vs/*
+libfft.dir/*
