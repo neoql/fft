@@ -34,7 +34,7 @@ int main()
     unsigned int count;
     Complex* array, *after;
 
-    count = 8;
+    count = 128;
     array = CreateSinArray(count);
     after = malloc(sizeof(Complex) * count);
 

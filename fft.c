@@ -30,8 +30,9 @@ static void Rader(Complex *src, Complex *dest, unsigned int count)
     unsigned int i, j, k, lv;
 
     j = 0;
-    for (i = 1; i < count; i++) {
-        lv = 0;
+    for (i = 0; i < count; i++) {
+		dest[i] = src[j];
+		lv = 0;
         while (1) {
             k = count >> ++lv;
             if (k > j) {
@@ -40,9 +41,7 @@ static void Rader(Complex *src, Complex *dest, unsigned int count)
             }
             j -= k;
         }
-        dest[i] = src[j];
     }
-    return;
 }
 
 

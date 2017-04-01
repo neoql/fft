@@ -8,9 +8,9 @@
 
 #ifdef _WIN32
 #ifdef libfft_EXPORTS
-#define BMP_API __declspec(dllexport)
+#define FFT_API __declspec(dllexport)
 #else
-#define BMP_API __declspec(dllimport)
+#define FFT_API __declspec(dllimport)
 #endif
 #else
 #define FFT_API
