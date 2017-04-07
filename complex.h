@@ -26,6 +26,7 @@ typedef struct {
 extern FFT_API Complex add(Complex a, Complex b);
 extern FFT_API Complex sub(Complex a, Complex b);
 extern FFT_API Complex mul(Complex a, Complex b);
+extern FFT_API double mod(Complex x);
 
 
 #endif //FFT_COMPLEX_H

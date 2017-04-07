@@ -3,6 +3,7 @@
 //
 
 #include "complex.h"
+#include <math.h>
 
 
 Complex add(Complex a, Complex b)
@@ -35,4 +36,10 @@ Complex mul(Complex a, Complex b)
     result.i = a.r * b.i + a.i * b.r;
 
     return result;
+}
+
+
+double mod(Complex x)
+{
+    return sqrt(x.r * x.r + x.i * x.i);
 }

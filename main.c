@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "fft.h"
 
 
 #define PI 3.1415926
 
 
-Complex* CreateSinArray(int count)
+Complex* CreateArray(int count)
 {
     int i;
     Complex *array;
@@ -14,7 +15,7 @@ Complex* CreateSinArray(int count)
     array = malloc(sizeof(Complex) * count);
 
     for (i = 0; i < count; i++) {
-        array[i].r = i * PI * 0.1;
+        array[i].r = sin(i * 0.1) + sin(i * 0.2);
         array[i].i = 0;
     }
 
@@ -27,7 +28,7 @@ void Print(Complex* array, int count)
     int i;
 
     for (i = 0; i < count; i++) {
-        printf("%lf\n", array[i].i);
+        printf("%lf\n", mod(array[i]));
     }
 }
 
@@ -38,7 +39,7 @@ int main()
     Complex* array, *after;
 
     count = 128;
-    array = CreateSinArray(count);
+    array = CreateArray(count);
     after = malloc(sizeof(Complex) * count);
 
     fft(array, after, count);
