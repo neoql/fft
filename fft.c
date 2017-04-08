@@ -3,23 +3,18 @@
 //
 
 #include "fft.h"
-#include <stdlib.h>
 #include <math.h>
 
 
 #define PI 3.1415926
 
 
-static Complex* GetW(int count)
+static Complex GetW(int k, int n)
 {
-    Complex* w;
-    int i;
+    Complex w;
 
-    w = malloc(sizeof(Complex) * count);
-    for (i = 0; i < count; i++) {
-        w[i].r = cos(2 * PI / count * i);
-        w[i].i = -1 * sin(2 * PI / count * i);
-    }
+    w.r = cos(2 * PI / n * k);
+    w.i = -1 * sin(2 * PI / n * k);
 
     return w;
 }
@@ -49,16 +44,15 @@ void fft(Complex *src, Complex *dest, unsigned int count)
 {
     int i, j, k, l;
     Complex up, down, temp;
-    Complex* w;
-
-    w = GetW(count);
+    Complex w;
 
     Rader(src, dest, count);
     for (i = 0; i < log(count) / log(2); i++) {
         l = (int)pow(2, i);
         for (j = 0; j < count; j += 2 * l) {
             for (k = 0; k < l; k++) {
-                temp = mul(dest[j + k + l], w[count * k / 2 / l]);
+                w = GetW(count * k / 2 / l, count);
+                temp = mul(dest[j + k + l], w);
                 up = add(dest[j + k], temp);
                 down = sub(dest[j + k], temp);
                 dest[j + k] = up;
@@ -66,5 +60,4 @@ void fft(Complex *src, Complex *dest, unsigned int count)
             }
         }
     }
-    free(w);
 }
