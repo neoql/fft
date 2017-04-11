@@ -40,9 +40,8 @@ int main()
 
     count = 128;
     array = CreateArray(count);
-    after = malloc(sizeof(Complex) * count);
 
-    fft(array, after, count);
+    after = fft(array, count);
     Print(after, count);
 
     free(array);
